@@ -1,0 +1,28 @@
+{
+  "name": "bangui",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "vue": "^3.2.45"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.0.0",
+    "eslint": "^8.30.0",
+    "eslint-plugin-vue": "^9.8.0",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.1.0",
+    "prettier": "2.8.1",
+    "vite": "^4.0.0"
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix",
+    "*.{js,css,md}": "prettier --write"
+  }
+}
