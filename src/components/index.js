@@ -1,1 +1,1 @@
-export { default as BanguiButton } from './BanguiButton.vue';
+export { default as BanguiButton } from './bangui-button.vue';
