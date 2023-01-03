@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue';
+import buttonClass from '../helpers/button-class.js'
 
 const props = defineProps({
   tag: {
@@ -30,27 +31,13 @@ const props = defineProps({
 })
 
 const style = computed(() => {
-  const colors = {
-    primary: '--bangui-button-color-primary',
-    secondary: '--bangui-button-color-primary',
-    danger: '--bangui-button-color-danger',
-    success: '--bangui-button-color-success',
-    warning: '--bangui-button-color-warning',
-    light: '--bangui-button-color-light',
-    dark: '--bangui-button-color-light',
-  };
-  const sizes = {
-    xs: '--bangui-button-size-xs',
-    sm: '--bangui-button-size-sm',
-    md: '--bangui-button-size-md',
-    lg: '--bangui-button-size-lg',
-    xl: '--bangui-button-size-xl',
-  };
+  const colors = buttonClass.colors;
+  const sizes = buttonClass.sizes;
   return [
-    '--bangui-button',
-    props.block ?? '--bangui-button-block',
-    props.disabled ?? '--bangui-button-disabled',
-    props.loading ?? '--bangui-button-loading',
+    buttonClass.wrapper,
+    props.block ? buttonClass.block : '',
+    props.disabled ? buttonClass.disabled : '',
+    props.loading ? buttonClass.loading : '',
     colors[props.color] ?? colors['primary'],
     sizes[props.size] ?? sizes['md'],
   ];
