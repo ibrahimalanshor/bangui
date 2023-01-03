@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils';
+import { ref } from 'vue';
 import { BanguiButton } from '../components';
 import buttonClass from '../helpers/button-class.js';
 
@@ -22,6 +23,16 @@ describe('button test', () => {
     const wrapper = mount(BanguiButton, {
       slots: {
         default: 'Test Button',
+      },
+    });
+
+    expect(wrapper.text()).toContain('Test Button');
+  });
+
+  test('label from props', async () => {
+    const wrapper = mount(BanguiButton, {
+      props: {
+        label: 'Test Button',
       },
     });
 
@@ -73,6 +84,7 @@ describe('button test', () => {
       },
     });
 
+    expect(wrapper.find('button').attributes('disabled')).toBeDefined();
     expect(wrapper.classes()).toContain(buttonClass.disabled);
   });
 
