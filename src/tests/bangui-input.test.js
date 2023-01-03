@@ -76,6 +76,7 @@ describe('input test', () => {
       },
     });
 
+    expect(wrapper.find('input').attributes('disabled')).toBeDefined();
     expect(wrapper.classes()).toContain(inputClass.disabled);
   });
 
