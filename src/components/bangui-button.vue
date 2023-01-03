@@ -7,7 +7,7 @@ const props = defineProps({
     type: String,
     default: 'button'
   },
-  label: String,
+  label: null,
   size: {
     type: String,
     default: 'md'
@@ -45,7 +45,7 @@ const style = computed(() => {
 </script>
 
 <template>
-  <component :is="props.tag" :class="style">
+  <component :is="props.tag" :class="style" :disabled="props.disabled">
     <slot>
       <span>{{ props.label }}</span>
     </slot>
