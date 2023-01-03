@@ -10,4 +10,19 @@ export default defineConfig({
       '@': path.resolve('./src'),
     },
   },
+  build: {
+    lib: {
+      entry: path.resolve(__dirname, './src/components/index.js'),
+      name: 'Bangui',
+      fileName: 'bangui',
+    },
+    rollupOptions: {
+      external: ['vue'],
+      output: {
+        globals: {
+          vue: 'Vue',
+        },
+      },
+    },
+  },
 });

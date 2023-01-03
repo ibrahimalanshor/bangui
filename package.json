@@ -1,28 +1,54 @@
 {
-  "name": "bangui",
-  "private": true,
+  "name": "@ibrahimalanshor/bangui",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "test": "vitest",
     "prepare": "husky install"
   },
   "dependencies": {
-    "vue": "^3.2.45"
+    "vue": "^3.2.45",
+    "vue-router": "^4.0.13"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
+    "@vue/test-utils": "^2.2.6",
     "eslint": "^8.30.0",
     "eslint-plugin-vue": "^9.8.0",
     "husky": "^8.0.2",
+    "jsdom": "^20.0.3",
     "lint-staged": "^13.1.0",
     "prettier": "2.8.1",
-    "vite": "^4.0.0"
+    "vite": "^4.0.0",
+    "vitest": "^0.26.3"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix",
     "*.{js,css,md}": "prettier --write"
-  }
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/bangui.umd.cjs",
+  "module": "./dist/bangui.js",
+  "exports": {
+    ".": {
+      "import": "./dist/bangui.js",
+      "require": "./dist/bangui.umd.cjs"
+    }
+  },
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ibrahimalanshor/bangui.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ibrahimalanshor/bangui/issues"
+  },
+  "homepage": "https://github.com/ibrahimalanshor/bangui#readme"
 }
