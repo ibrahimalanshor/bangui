@@ -1,36 +1,13 @@
 import { mount } from '@vue/test-utils';
 import { BanguiButton } from '../components';
-
-const classes = {
-  wrapper: '--bangui-button',
-  colors: {
-    primary: '--bangui-button-color-primary',
-    secondary: '--bangui-button-color-primary',
-    danger: '--bangui-button-color-danger',
-    success: '--bangui-button-color-success',
-    warning: '--bangui-button-color-warning',
-    light: '--bangui-button-color-light',
-    dark: '--bangui-button-color-light',
-  },
-  sizes: {
-    xs: '--bangui-button-size-xs',
-    sm: '--bangui-button-size-sm',
-    md: '--bangui-button-size-md',
-    lg: '--bangui-button-size-lg',
-    xl: '--bangui-button-size-xl',
-  },
-  block: '--bangui-button-block',
-  disabled: '--bangui-button-disabled',
-  loading: '--bangui-button-loading',
-};
+import buttonClass from '../helpers/button-class.js';
 
 describe('button test', () => {
   test('component exists', async () => {
     expect(BanguiButton).toBeTruthy();
   });
 
-  // todo
-  test('default class', async () => {
+  test('default', async () => {
     const wrapper = mount(BanguiButton, {
       slots: {
         default: 'Test Button',
@@ -38,6 +15,7 @@ describe('button test', () => {
     });
 
     expect(wrapper.text()).toContain('Test Button');
+    expect(wrapper.classes()).toContain(buttonClass.wrapper);
   });
 
   test('label from default slot', async () => {
@@ -50,35 +28,62 @@ describe('button test', () => {
     expect(wrapper.text()).toContain('Test Button');
   });
 
-  test('label from props', async () => {
-    const wrapper = mount(BanguiButton, {
-      props: {
-        label: 'Test Button',
-      },
-    });
+  test('colors', async () => {
+    for (const color in buttonClass.colors) {
+      const wrapper = mount(BanguiButton, {
+        props: {
+          label: 'Test Button',
+          color: color,
+        },
+      });
 
-    expect(wrapper.text()).toContain('Test Button');
+      expect(wrapper.classes()).toContain(buttonClass.colors[color]);
+    }
   });
 
-  // todo
-  test('label from props', async () => {
-    const wrapper = mount(BanguiButton, {
-      props: {
-        label: 'Test Button',
-      },
-    });
+  test('sizes', async () => {
+    for (const size in buttonClass.sizes) {
+      const wrapper = mount(BanguiButton, {
+        props: {
+          label: 'Test Button',
+          size: size,
+        },
+      });
 
-    expect(wrapper.text()).toContain('Test Button');
+      expect(wrapper.classes()).toContain(buttonClass.sizes[size]);
+    }
   });
 
-  // todo
-  test('label from props', async () => {
+  test('block', async () => {
     const wrapper = mount(BanguiButton, {
       props: {
         label: 'Test Button',
+        block: true,
       },
     });
 
-    expect(wrapper.text()).toContain('Test Button');
+    expect(wrapper.classes()).toContain(buttonClass.block);
+  });
+
+  test('disabled', async () => {
+    const wrapper = mount(BanguiButton, {
+      props: {
+        label: 'Test Button',
+        disabled: true,
+      },
+    });
+
+    expect(wrapper.classes()).toContain(buttonClass.disabled);
+  });
+
+  test('loading', async () => {
+    const wrapper = mount(BanguiButton, {
+      props: {
+        label: 'Test Button',
+        loading: true,
+      },
+    });
+
+    expect(wrapper.classes()).toContain(buttonClass.loading);
   });
 });
