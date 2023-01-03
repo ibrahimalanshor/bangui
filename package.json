@@ -26,8 +26,8 @@
     "vitest": "^0.26.3"
   },
   "lint-staged": {
-    "*.js": "eslint --cache --fix",
-    "*.{js,css,md}": "prettier --write"
+    "*.{vue,js}": "eslint --cache --fix",
+    "*.{vue,js,css,md}": "prettier --write"
   },
   "files": [
     "dist"
