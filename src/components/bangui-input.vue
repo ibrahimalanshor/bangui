@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref } from 'vue';
-import inputClass from '../helpers/input-class.js'
+import inputClass from '../helpers/input-class.js';
 
 const props = defineProps({
   modelValue: null,
@@ -14,16 +14,16 @@ const props = defineProps({
   },
   block: {
     type: Boolean,
-    default: false
+    default: false,
   },
   disabled: {
     type: Boolean,
-    default: false
+    default: false,
   },
   loading: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 });
 const emit = defineEmits(['update:modelValue', 'change', 'input']);
 const value = computed({
@@ -39,9 +39,9 @@ const style = computed(() => {
   const sizes = inputClass.sizes;
 
   return [
-  	inputClass.wrapper,
-  	colors[props.color] ?? colors['light'],
-  	sizes[props.size] ?? sizes['md'],
+    inputClass.wrapper,
+    colors[props.color] ?? colors['light'],
+    sizes[props.size] ?? sizes['md'],
     props.block ? inputClass.block : '',
     props.disabled ? inputClass.disabled : '',
     props.loading ? inputClass.loading : '',
@@ -52,10 +52,12 @@ const handleInput = () => emit('input');
 </script>
 
 <template>
-	<input
-	type="text"
+  <input
+    type="text"
     :class="style"
+    :disabled="props.disabled"
     v-model="value"
     v-on:change="handleChange"
-    v-on:input="handleInput">
+    v-on:input="handleInput"
+  />
 </template>
