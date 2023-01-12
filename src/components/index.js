@@ -1,4 +1,5 @@
 export { default as BanguiAlert } from './bangui-alert.vue';
+export { default as BanguiBadge } from './bangui-badge.vue';
 export { default as BanguiButton } from './bangui-button.vue';
 export { default as BanguiCheckbox } from './bangui-checkbox.vue';
 export { default as BanguiForm } from './bangui-form.vue';
