@@ -1,0 +1,25 @@
+export default {
+  wrapper: '--bangui-form',
+  header: '--bangui-form-header',
+  content: '--bangui-form-content',
+  label: '--bangui-form-label',
+  message: '--bangui-form-message',
+  labelColors: {
+    primary: '--bangui-label-color-primary',
+    secondary: '--bangui-label-color-primary',
+    danger: '--bangui-label-color-danger',
+    success: '--bangui-label-color-success',
+    warning: '--bangui-label-color-warning',
+    light: '--bangui-label-color-light',
+    dark: '--bangui-label-color-light',
+  },
+  messageColors: {
+    primary: '--bangui-message-color-primary',
+    secondary: '--bangui-message-color-primary',
+    danger: '--bangui-message-color-danger',
+    success: '--bangui-message-color-success',
+    warning: '--bangui-message-color-warning',
+    light: '--bangui-message-color-light',
+    dark: '--bangui-message-color-light',
+  },
+};
