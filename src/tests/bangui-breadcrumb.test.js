@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { describe, test, expect } from 'vitest';
 import { BanguiBreadcrumb } from '../components';
+import breadcrumbClass from '../helpers/breadcrumb-class.js';
 
 describe('breadcrumb', () => {
   const items = [
@@ -34,5 +35,19 @@ describe('breadcrumb', () => {
     expect(wrapper.findAll('li').length).toEqual(3);
   });
 
-  test('active');
+  test('active', () => {
+    const wrapper = mount(BanguiBreadcrumb, {
+      props: {
+        items,
+        activeKey: items[1].key,
+      },
+    });
+
+    expect(
+      wrapper.find(`.${breadcrumbClass.itemActive}`).exists()
+    ).toBeTruthy();
+    expect(wrapper.find(`.${breadcrumbClass.itemActive}`).text()).toEqual(
+      items[1].label
+    );
+  });
 });
