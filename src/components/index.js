@@ -3,6 +3,7 @@ export { default as BanguiBadge } from './bangui-badge.vue';
 export { default as BanguiBox } from './bangui-box.vue';
 export { default as BanguiBreadcrumb } from './bangui-breadcrumb.vue';
 export { default as BanguiButton } from './bangui-button.vue';
+export { default as BanguiCard } from './bangui-card.vue';
 export { default as BanguiCheckbox } from './bangui-checkbox.vue';
 export { default as BanguiForm } from './bangui-form.vue';
 export { default as BanguiInput } from './bangui-input.vue';
