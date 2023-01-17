@@ -10,6 +10,7 @@ export { default as BanguiDropdown } from './bangui-dropdown.vue';
 export { default as BanguiForm } from './bangui-form.vue';
 export { default as BanguiInput } from './bangui-input.vue';
 export { default as BanguiModal } from './bangui-modal.vue';
+export { default as BanguiPagination } from './bangui-pagination.vue';
 export { default as BanguiRadio } from './bangui-radio.vue';
 export { default as BanguiSelect } from './bangui-select.vue';
 export { default as BanguiTextarea } from './bangui-textarea.vue';
