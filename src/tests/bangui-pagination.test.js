@@ -11,10 +11,100 @@ describe('pagination test', () => {
   test('default', () => {
     const wrapper = mount(BanguiPagination, {
       props: {
-        size: 10,
+        size: 50,
       },
     });
 
     expect(wrapper.find(`.${paginationClass.wrapper}`).exists()).toBeTruthy();
+  });
+
+  test('prev', async () => {
+    const wrapper = mount(BanguiPagination, {
+      props: {
+        size: 50,
+      },
+    });
+
+    expect(wrapper.find(`.${paginationClass.prev}`).exists()).toBeTruthy();
+    expect(wrapper.find(`.${paginationClass.prev}`).classes()).toContain(
+      paginationClass.disabled
+    );
+
+    await wrapper.findAll(`.${paginationClass.item}`)[1].trigger('click');
+
+    expect(wrapper.find(`.${paginationClass.prev}`).classes()).not.toContain(
+      paginationClass.disabled
+    );
+
+    await wrapper.find(`.${paginationClass.prev}`).trigger('click');
+
+    expect(wrapper.emitted()).toHaveProperty('prev');
+
+    expect(wrapper.findAll(`.${paginationClass.item}`)[0].classes()).toContain(
+      paginationClass.active
+    );
+    expect(wrapper.find(`.${paginationClass.prev}`).classes()).toContain(
+      paginationClass.disabled
+    );
+  });
+
+  test('next', async () => {
+    const wrapper = mount(BanguiPagination, {
+      props: {
+        size: 50,
+      },
+    });
+
+    expect(wrapper.find(`.${paginationClass.next}`).exists()).toBeTruthy();
+    expect(wrapper.find(`.${paginationClass.next}`).classes()).not.toContain(
+      paginationClass.disabled
+    );
+
+    await wrapper.find(`.${paginationClass.next}`).trigger('click');
+
+    expect(wrapper.emitted()).toHaveProperty('next');
+
+    expect(wrapper.findAll(`.${paginationClass.item}`)[1].classes()).toContain(
+      paginationClass.active
+    );
+
+    await wrapper.findAll(`.${paginationClass.item}`)[4].trigger('click');
+
+    expect(wrapper.find(`.${paginationClass.next}`).classes()).toContain(
+      paginationClass.disabled
+    );
+  });
+
+  test('item', async () => {
+    const wrapper = mount(BanguiPagination, {
+      props: {
+        size: 50,
+      },
+    });
+
+    expect(wrapper.findAll(`.${paginationClass.item}`).length).toEqual(50 / 10);
+    expect(wrapper.findAll(`.${paginationClass.item}`)[0].classes()).toContain(
+      paginationClass.active
+    );
+
+    await wrapper.findAll(`.${paginationClass.item}`)[3].trigger('click');
+
+    expect(wrapper.emitted()).toHaveProperty('page-change');
+    expect(wrapper.emitted()['page-change'][0][0]).toEqual(4);
+
+    expect(wrapper.findAll(`.${paginationClass.item}`)[3].classes()).toContain(
+      paginationClass.active
+    );
+  });
+
+  test('perPage', () => {
+    const wrapper = mount(BanguiPagination, {
+      props: {
+        size: 50,
+        perPage: 5,
+      },
+    });
+
+    expect(wrapper.findAll(`.${paginationClass.item}`).length).toEqual(50 / 5);
   });
 });
