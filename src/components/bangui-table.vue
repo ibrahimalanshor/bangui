@@ -51,7 +51,7 @@ const style = computed(() => {
           :class="style.tbodyTr"
         >
           <td v-for="column in columns" :key="column.key" :class="style.td">
-            {{ item[column.key] }}
+            {{ column.customValue ? column.value(item) : item[column.key] }}
           </td>
         </tr>
       </tbody>

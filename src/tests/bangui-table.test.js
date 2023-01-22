@@ -13,19 +13,28 @@ describe('table test', () => {
       key: 'name',
       label: 'Name',
     },
+    {
+      key: 'status',
+      label: 'Status',
+      customValue: true,
+      value: (item) => item.status + ' Custom',
+    },
   ];
   const data = [
     {
       id: 1,
       name: 'Item 1',
+      status: 'Status 1',
     },
     {
       id: 2,
       name: 'Item 2',
+      status: 'Status 2',
     },
     {
       id: 3,
       name: 'Item 3',
+      status: 'Status 3',
     },
   ];
 
@@ -40,9 +49,31 @@ describe('table test', () => {
 
     expect(wrapper.find(`.${tableClass.table}`).exists()).toBeTruthy();
     expect(wrapper.find(`.${tableClass.thead}`).exists()).toBeTruthy();
-    expect(wrapper.findAll(`.${tableClass.th}`).length).toEqual(2);
+    expect(wrapper.findAll(`.${tableClass.th}`).length).toEqual(3);
     expect(wrapper.find(`.${tableClass.tbody}`).exists()).toBeTruthy();
     expect(wrapper.findAll(`.${tableClass.tbodyTr}`).length).toEqual(3);
+    expect(
+      wrapper.findAll(`.${tableClass.tbodyTr}`)[0].findAll(`.${tableClass.td}`)
+        .length
+    ).toEqual(3);
+    expect(
+      wrapper
+        .findAll(`.${tableClass.tbodyTr}`)[0]
+        .findAll(`.${tableClass.td}`)[0]
+        .text()
+    ).toEqual('1');
+    expect(
+      wrapper
+        .findAll(`.${tableClass.tbodyTr}`)[0]
+        .findAll(`.${tableClass.td}`)[1]
+        .text()
+    ).toEqual('Item 1');
+    expect(
+      wrapper
+        .findAll(`.${tableClass.tbodyTr}`)[0]
+        .findAll(`.${tableClass.td}`)[2]
+        .text()
+    ).toEqual('Status 1 Custom');
 
     await wrapper.setProps({ data: [] });
 
