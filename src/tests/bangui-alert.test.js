@@ -12,11 +12,11 @@ describe('alert test', () => {
   test('default', async () => {
     const wrapper = mount(BanguiAlert);
 
-    expect(wrapper.find(`.${alertClass.wrapper}`).exists()).toBeFalsy();
+    expect(wrapper.find(`.${alertClass.wrapper}`).exists()).toBeTruthy();
   });
 
   test('visible', async () => {
-    const visible = ref(true);
+    const visible = ref(false);
 
     const wrapper = mount(BanguiAlert, {
       props: {
@@ -24,16 +24,14 @@ describe('alert test', () => {
       },
     });
 
-    expect(wrapper.find(`.${alertClass.wrapper}`).exists()).toBeTruthy();
+    expect(wrapper.find(`.${alertClass.wrapper}`).exists()).toBeFalsy();
   });
 
   test('message from props', async () => {
-    const visible = ref(true);
     const message = 'Test Message';
 
     const wrapper = mount(BanguiAlert, {
       props: {
-        modelValue: visible.value,
         message,
       },
     });
@@ -42,12 +40,10 @@ describe('alert test', () => {
   });
 
   test('message from slot', async () => {
-    const visible = ref(true);
     const message = 'Test Message';
 
     const wrapper = mount(BanguiAlert, {
       props: {
-        modelValue: visible.value,
         message: 'Overrided',
       },
       slots: {
@@ -58,13 +54,22 @@ describe('alert test', () => {
     expect(wrapper.text()).toEqual(message);
   });
 
-  test('icon', async () => {
-    const visible = ref(true);
-
+  test('title', async () => {
     const wrapper = mount(BanguiAlert, {
       props: {
-        modelValue: visible.value,
+        title: 'Test Title',
       },
+    });
+
+    expect(wrapper.find(`.${alertClass.title}`).exists()).toBeFalsy();
+
+    await wrapper.setProps({ withTitle: true });
+
+    expect(wrapper.find(`.${alertClass.title}`).exists()).toBeTruthy();
+  });
+
+  test('icon', async () => {
+    const wrapper = mount(BanguiAlert, {
       slots: {
         icon: h('span', {}, 'Icon'),
       },
@@ -78,12 +83,7 @@ describe('alert test', () => {
   });
 
   test('closable', async () => {
-    const visible = ref(true);
-
     const wrapper = mount(BanguiAlert, {
-      props: {
-        modelValue: visible.value,
-      },
       slots: {
         close: ({ close }) => h('span', { onClick: close }, 'Close'),
       },
@@ -100,16 +100,12 @@ describe('alert test', () => {
     expect(wrapper.emitted()).toHaveProperty('update:modelValue');
     expect(wrapper.emitted()['update:modelValue'][0][0]).toBeFalsy();
 
-    visible.value = false;
-
-    await wrapper.setProps({ modelValue: visible.value });
+    await wrapper.setProps({ modelValue: false });
 
     expect(wrapper.find('div').exists()).toBeFalsy();
 
-    visible.value = true;
-
     await wrapper.setProps({
-      modelValue: visible.value,
+      modelValue: true,
       autoClose: true,
       timeout: 1000,
     });
@@ -126,7 +122,6 @@ describe('alert test', () => {
     for (const colorName in alertClass.colors) {
       const wrapper = mount(BanguiAlert, {
         props: {
-          modelValue: true,
           color: colorName,
         },
       });

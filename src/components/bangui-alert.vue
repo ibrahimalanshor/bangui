@@ -5,9 +5,14 @@ import alertClass from '../helpers/alert-class.js';
 const props = defineProps({
   modelValue: {
     type: Boolean,
+    default: true,
+  },
+  title: String,
+  message: String,
+  withTitle: {
+    type: Boolean,
     default: false,
   },
-  message: String,
   withIcon: {
     type: Boolean,
     default: false,
@@ -41,10 +46,14 @@ const visible = computed({
 });
 
 const style = computed(() => {
-  return [
-    alertClass.wrapper,
-    alertClass.colors[props.color] ?? alertClass.colors.light,
-  ];
+  return {
+    wrapper: [
+      alertClass.wrapper,
+      alertClass.colors[props.color] ?? alertClass.colors.light,
+    ],
+    content: [alertClass.content],
+    title: [alertClass.title],
+  };
 });
 
 function handleClose() {
@@ -59,9 +68,12 @@ watch(visible, () => {
 </script>
 
 <template>
-  <div v-if="visible" :class="style">
+  <div v-if="visible" :class="style.wrapper">
     <slot name="icon" v-if="props.withIcon" />
-    <slot>{{ props.message }}</slot>
+    <div :class="style.content">
+      <h3 v-if="props.withTitle" :class="style.title">{{ props.title }}</h3>
+      <slot>{{ props.message }}</slot>
+    </div>
     <slot name="close" v-if="props.closeable" :close="handleClose" />
   </div>
 </template>

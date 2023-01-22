@@ -1,5 +1,7 @@
 export default {
   wrapper: 'bangui-alert',
+  content: 'bangui-alert-content',
+  title: 'bangui-alert-title',
   colors: {
     primary: 'bangui-alert-color-primary',
     secondary: 'bangui-alert-color-primary',
