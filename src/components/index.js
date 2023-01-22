@@ -17,3 +17,4 @@ export { default as BanguiSkeleton } from './bangui-skeleton.vue';
 export { default as BanguiTable } from './bangui-table.vue';
 export { default as BanguiTextarea } from './bangui-textarea.vue';
 export { default as BanguiToast } from './bangui-toast.vue';
+export { default as BanguiWidget } from './bangui-widget.vue';
