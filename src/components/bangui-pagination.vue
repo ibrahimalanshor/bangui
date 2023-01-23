@@ -3,6 +3,10 @@ import { ref, computed } from 'vue';
 import paginationClass from '../helpers/pagination-class.js';
 
 const props = defineProps({
+  modelValue: {
+    type: Number,
+    default: 1,
+  },
   prevLabel: {
     type: String,
     default: 'Prev',
@@ -20,9 +24,16 @@ const props = defineProps({
     default: 10,
   },
 });
-const emit = defineEmits(['page-change', 'prev', 'next']);
+const emit = defineEmits(['update:modelValue', 'page-change', 'prev', 'next']);
 
-const activePage = ref(1);
+const activePage = computed({
+  get: function () {
+    return props.modelValue;
+  },
+  set: function (value) {
+    emit('update:modelValue', value);
+  },
+});
 
 const itemsLength = computed(() => Math.round(props.size / props.perPage));
 const style = computed(() => {

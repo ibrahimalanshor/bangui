@@ -38,6 +38,11 @@ describe('pagination test', () => {
 
     await wrapper.findAll(`.${paginationClass.item}`)[1].trigger('click');
 
+    expect(wrapper.emitted()).toHaveProperty('update:modelValue');
+    expect(wrapper.emitted()['update:modelValue'][0][0]).toEqual(2);
+
+    await wrapper.setProps({ modelValue: 2 });
+
     expect(wrapper.find(`.${paginationClass.prev}`).classes()).not.toContain(
       paginationClass.disabled
     );
@@ -45,6 +50,8 @@ describe('pagination test', () => {
     await wrapper.find(`.${paginationClass.prev}`).trigger('click');
 
     expect(wrapper.emitted()).toHaveProperty('prev');
+
+    await wrapper.setProps({ modelValue: 1 });
 
     expect(wrapper.findAll(`.${paginationClass.item}`)[0].classes()).toContain(
       paginationClass.active
@@ -58,11 +65,27 @@ describe('pagination test', () => {
     const wrapper = mount(BanguiPagination, {
       props: {
         size: 50,
+        modelValue: 5,
       },
     });
 
     expect(wrapper.find(`.${paginationClass.next}`).exists()).toBeTruthy();
     expect(wrapper.find(`.${paginationClass.next}`).text()).toEqual('Next');
+
+    expect(wrapper.find(`.${paginationClass.next}`).classes()).toContain(
+      paginationClass.disabled
+    );
+
+    await wrapper.find(`.${paginationClass.next}`).trigger('click');
+
+    expect(wrapper.emitted()).not.toHaveProperty('next');
+
+    await wrapper.findAll(`.${paginationClass.item}`)[3].trigger('click');
+
+    expect(wrapper.emitted()).toHaveProperty('update:modelValue');
+    expect(wrapper.emitted()['update:modelValue'][0][0]).toEqual(4);
+
+    await wrapper.setProps({ modelValue: 4 });
 
     expect(wrapper.find(`.${paginationClass.next}`).classes()).not.toContain(
       paginationClass.disabled
@@ -72,19 +95,14 @@ describe('pagination test', () => {
 
     expect(wrapper.emitted()).toHaveProperty('next');
 
-    expect(wrapper.findAll(`.${paginationClass.item}`)[1].classes()).toContain(
+    await wrapper.setProps({ modelValue: 5 });
+
+    expect(wrapper.findAll(`.${paginationClass.item}`)[4].classes()).toContain(
       paginationClass.active
     );
-
-    await wrapper.findAll(`.${paginationClass.item}`)[4].trigger('click');
-
     expect(wrapper.find(`.${paginationClass.next}`).classes()).toContain(
       paginationClass.disabled
     );
-
-    // await wrapper.find(`.${paginationClass.next}`).trigger('click')
-
-    // expect(wrapper.emitted()).not.toHaveProperty('next')
   });
 
   test('item', async () => {
@@ -100,9 +118,12 @@ describe('pagination test', () => {
     );
 
     await wrapper.findAll(`.${paginationClass.item}`)[3].trigger('click');
+    await wrapper.setProps({ modelValue: 4 });
 
     expect(wrapper.emitted()).toHaveProperty('page-change');
+    expect(wrapper.emitted()).toHaveProperty('update:modelValue');
     expect(wrapper.emitted()['page-change'][0][0]).toEqual(4);
+    expect(wrapper.emitted()['update:modelValue'][0][0]).toEqual(4);
 
     expect(wrapper.findAll(`.${paginationClass.item}`)[3].classes()).toContain(
       paginationClass.active
