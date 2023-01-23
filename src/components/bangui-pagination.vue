@@ -37,14 +37,18 @@ const style = computed(() => {
 });
 
 function handleClickPrev() {
-  activePage.value--;
+  if (activePage.value > 1) {
+    activePage.value--;
 
-  emit('prev');
+    emit('prev');
+  }
 }
 function handleClickNext() {
-  activePage.value++;
+  if (activePage.value < itemsLength.value) {
+    activePage.value++;
 
-  emit('next');
+    emit('next');
+  }
 }
 function handleClickItem(pageNumber) {
   activePage.value = pageNumber;
