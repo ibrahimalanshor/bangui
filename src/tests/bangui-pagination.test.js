@@ -26,6 +26,8 @@ describe('pagination test', () => {
     });
 
     expect(wrapper.find(`.${paginationClass.prev}`).exists()).toBeTruthy();
+    expect(wrapper.find(`.${paginationClass.prev}`).text()).toEqual('Prev');
+
     expect(wrapper.find(`.${paginationClass.prev}`).classes()).toContain(
       paginationClass.disabled
     );
@@ -56,6 +58,8 @@ describe('pagination test', () => {
     });
 
     expect(wrapper.find(`.${paginationClass.next}`).exists()).toBeTruthy();
+    expect(wrapper.find(`.${paginationClass.next}`).text()).toEqual('Next');
+
     expect(wrapper.find(`.${paginationClass.next}`).classes()).not.toContain(
       paginationClass.disabled
     );
