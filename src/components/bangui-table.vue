@@ -57,7 +57,10 @@ function handleClickRow(item) {
           v-on:click="handleClickRow(item)"
         >
           <td v-for="column in columns" :key="column.key" :class="style.td">
-            {{ column.customValue ? column.value(item) : item[column.key] }}
+            <component v-if="column.render" :is="column.render" :item="item" />
+            <span v-else>{{
+              column.customValue ? column.value(item) : item[column.key]
+            }}</span>
           </td>
         </tr>
       </tbody>

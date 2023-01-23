@@ -1,3 +1,4 @@
+import { h } from 'vue';
 import { describe, test, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 import { BanguiTable } from '../components/';
@@ -12,6 +13,7 @@ describe('table test', () => {
     {
       key: 'name',
       label: 'Name',
+      render: (props) => h('h2', {}, { default: () => props.item.name }),
     },
     {
       key: 'status',
@@ -57,6 +59,10 @@ describe('table test', () => {
       wrapper.findAll(`.${tableClass.tbodyTr}`)[0].findAll(`.${tableClass.td}`)
         .length
     ).toEqual(3);
+    expect(
+      wrapper.findAll(`.${tableClass.tbodyTr}`)[0].find('h2').exists()
+    ).toBeTruthy();
+
     expect(
       wrapper
         .findAll(`.${tableClass.tbodyTr}`)[0]
