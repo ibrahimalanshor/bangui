@@ -9,7 +9,7 @@ const props = defineProps({
   },
   nextLabel: {
     type: String,
-    default: 'Prev',
+    default: 'Next',
   },
   size: {
     type: Number,
