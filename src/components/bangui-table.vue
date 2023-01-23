@@ -20,6 +20,7 @@ const props = defineProps({
     default: 'Empty',
   },
 });
+const emit = defineEmits(['click-row']);
 
 const style = computed(() => {
   return {
@@ -32,6 +33,10 @@ const style = computed(() => {
     td: [tableClass.td],
   };
 });
+
+function handleClickRow(item) {
+  emit('click-row', item);
+}
 </script>
 
 <template>
@@ -49,6 +54,7 @@ const style = computed(() => {
           v-for="item in props.data"
           :key="item[props.itemKey]"
           :class="style.tbodyTr"
+          v-on:click="handleClickRow(item)"
         >
           <td v-for="column in columns" :key="column.key" :class="style.td">
             {{ column.customValue ? column.value(item) : item[column.key] }}

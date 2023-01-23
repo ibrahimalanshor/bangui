@@ -52,6 +52,7 @@ describe('table test', () => {
     expect(wrapper.findAll(`.${tableClass.th}`).length).toEqual(3);
     expect(wrapper.find(`.${tableClass.tbody}`).exists()).toBeTruthy();
     expect(wrapper.findAll(`.${tableClass.tbodyTr}`).length).toEqual(3);
+
     expect(
       wrapper.findAll(`.${tableClass.tbodyTr}`)[0].findAll(`.${tableClass.td}`)
         .length
@@ -74,6 +75,11 @@ describe('table test', () => {
         .findAll(`.${tableClass.td}`)[2]
         .text()
     ).toEqual('Status 1 Custom');
+
+    await wrapper.findAll(`.${tableClass.tbodyTr}`)[0].trigger('click');
+
+    expect(wrapper.emitted()).toHaveProperty('click-row');
+    expect(wrapper.emitted()['click-row'][0][0]).toEqual(data[0]);
 
     await wrapper.setProps({ data: [] });
 
