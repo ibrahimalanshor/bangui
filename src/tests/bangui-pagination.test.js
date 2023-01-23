@@ -32,6 +32,10 @@ describe('pagination test', () => {
       paginationClass.disabled
     );
 
+    await wrapper.find(`.${paginationClass.prev}`).trigger('click');
+
+    expect(wrapper.emitted()).not.toHaveProperty('prev');
+
     await wrapper.findAll(`.${paginationClass.item}`)[1].trigger('click');
 
     expect(wrapper.find(`.${paginationClass.prev}`).classes()).not.toContain(
@@ -77,6 +81,10 @@ describe('pagination test', () => {
     expect(wrapper.find(`.${paginationClass.next}`).classes()).toContain(
       paginationClass.disabled
     );
+
+    // await wrapper.find(`.${paginationClass.next}`).trigger('click')
+
+    // expect(wrapper.emitted()).not.toHaveProperty('next')
   });
 
   test('item', async () => {
