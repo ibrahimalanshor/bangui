@@ -51,6 +51,8 @@ describe('pagination test', () => {
 
     expect(wrapper.emitted()).toHaveProperty('prev');
 
+    expect(wrapper.emitted()).toHaveProperty('page-change');
+
     await wrapper.setProps({ modelValue: 1 });
 
     expect(wrapper.findAll(`.${paginationClass.item}`)[0].classes()).toContain(
@@ -95,6 +97,8 @@ describe('pagination test', () => {
 
     expect(wrapper.emitted()).toHaveProperty('next');
 
+    expect(wrapper.emitted()).toHaveProperty('page-change');
+
     await wrapper.setProps({ modelValue: 5 });
 
     expect(wrapper.findAll(`.${paginationClass.item}`)[4].classes()).toContain(
@@ -122,7 +126,7 @@ describe('pagination test', () => {
 
     expect(wrapper.emitted()).toHaveProperty('page-change');
     expect(wrapper.emitted()).toHaveProperty('update:modelValue');
-    expect(wrapper.emitted()['page-change'][0][0]).toEqual(4);
+
     expect(wrapper.emitted()['update:modelValue'][0][0]).toEqual(4);
 
     expect(wrapper.findAll(`.${paginationClass.item}`)[3].classes()).toContain(

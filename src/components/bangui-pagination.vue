@@ -51,6 +51,7 @@ function handleClickPrev() {
   if (activePage.value > 1) {
     activePage.value--;
 
+    emit('page-change');
     emit('prev');
   }
 }
@@ -58,13 +59,14 @@ function handleClickNext() {
   if (activePage.value < itemsLength.value) {
     activePage.value++;
 
+    emit('page-change');
     emit('next');
   }
 }
 function handleClickItem(pageNumber) {
   activePage.value = pageNumber;
 
-  emit('page-change', pageNumber);
+  emit('page-change');
 }
 </script>
 
