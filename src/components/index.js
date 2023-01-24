@@ -7,6 +7,7 @@ export { default as BanguiCard } from './bangui-card.vue';
 export { default as BanguiCheckbox } from './bangui-checkbox.vue';
 export { default as BanguiConfirm } from './bangui-confirm.vue';
 export { default as BanguiDropdown } from './bangui-dropdown.vue';
+export { default as BanguiDatatable } from './bangui-datatable.vue';
 export { default as BanguiForm } from './bangui-form.vue';
 export { default as BanguiInput } from './bangui-input.vue';
 export { default as BanguiLoading } from './bangui-loading.vue';
