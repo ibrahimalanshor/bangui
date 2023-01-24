@@ -64,6 +64,9 @@ describe('datatable test', () => {
       props: { columns, data, paginationSize: 50 },
     });
 
+    expect(
+      wrapper.find(`.${datatableClass.tableWrapper}`).exists()
+    ).toBeTruthy();
     expect(wrapper.findComponent(BanguiTable).exists()).toBeTruthy();
 
     expect(wrapper.findComponent(BanguiTable).findAll('th').length).toEqual(
@@ -87,6 +90,9 @@ describe('datatable test', () => {
       props: { columns, data, paginationSize: 50 },
     });
 
+    expect(
+      wrapper.find(`.${datatableClass.paginationWrapper}`).exists()
+    ).toBeTruthy();
     expect(wrapper.findComponent(BanguiPagination).exists()).toBeTruthy();
 
     expect(
