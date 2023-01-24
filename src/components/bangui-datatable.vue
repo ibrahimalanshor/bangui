@@ -60,6 +60,8 @@ const pageValue = computed({
 const style = computed(() => {
   return {
     wrapper: datatableClass.wrapper,
+    tableWrapper: datatableClass.tableWrapper,
+    paginationWrapper: datatableClass.paginationWrapper,
   };
 });
 
@@ -74,20 +76,24 @@ function handlePageChange() {
 <template>
   <div :class="style.wrapper">
     <bangui-loading v-if="props.isLoading" />
-    <bangui-table
-      :columns="props.columns"
-      :data="props.data"
-      :item-key="props.itemKey"
-      :empty-message="props.emptyMessage"
-      v-on:click-row="handleClickRow"
-    />
-    <bangui-pagination
-      :prev-label="props.paginationPrevLabel"
-      :next-label="props.paginationNextLabel"
-      :size="props.paginationSize"
-      :per-page="props.paginationPerPage"
-      v-model="pageValue"
-      v-on:page-change="handlePageChange"
-    />
+    <div :class="style.tableWrapper">
+      <bangui-table
+        :columns="props.columns"
+        :data="props.data"
+        :item-key="props.itemKey"
+        :empty-message="props.emptyMessage"
+        v-on:click-row="handleClickRow"
+      />
+    </div>
+    <div :class="style.paginationWrapper">
+      <bangui-pagination
+        :prev-label="props.paginationPrevLabel"
+        :next-label="props.paginationNextLabel"
+        :size="props.paginationSize"
+        :per-page="props.paginationPerPage"
+        v-model="pageValue"
+        v-on:page-change="handlePageChange"
+      />
+    </div>
   </div>
 </template>
