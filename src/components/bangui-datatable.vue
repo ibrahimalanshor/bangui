@@ -1,5 +1,15 @@
 <script setup>
+import { computed } from 'vue';
+import BanguiLoading from './bangui-loading.vue';
+import BanguiTable from './bangui-table.vue';
+import BanguiPagination from './bangui-pagination.vue';
+import datatableClass from '../helpers/datatable-class.js';
+
 const props = defineProps({
+  isLoading: {
+    type: Boolean,
+    default: false,
+  },
   columns: {
     type: Array,
     required: true,
@@ -47,13 +57,16 @@ const pageValue = computed({
     emit('update:page', value);
   },
 });
+const style = computed(() => {
+  return {
+    wrapper: datatableClass.wrapper,
+  };
+});
 
 function handleClickRow(item) {
   emit('click-row', item);
 }
-function handleClickItem(pageNumber) {
-  activePage.value = pageNumber;
-
+function handlePageChange() {
   emit('page-change');
 }
 </script>
