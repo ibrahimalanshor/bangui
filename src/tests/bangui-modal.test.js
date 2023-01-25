@@ -1,7 +1,7 @@
 import { h } from 'vue';
 import { describe, test, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
-import { BanguiModal, BanguiButton } from '../components';
+import { BanguiModal, BanguiButton, BanguiClose } from '../components';
 import modalClass from '../helpers/modal-class.js';
 
 describe('modal test', () => {
@@ -38,6 +38,7 @@ describe('modal test', () => {
 
     expect(wrapper.find(`.${modalClass.header}`).exists()).toBeTruthy();
     expect(wrapper.find(`.${modalClass.title}`).exists()).toBeTruthy();
+    expect(wrapper.findComponent(BanguiClose).exists()).toBeTruthy();
   });
 
   test('title', () => {
