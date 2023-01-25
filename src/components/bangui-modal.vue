@@ -1,4 +1,5 @@
 <script setup>
+import BanguiClose from './bangui-close.vue';
 import { computed } from 'vue';
 import modalClass from '../helpers/modal-class.js';
 
@@ -56,7 +57,9 @@ function handleClose() {
     <div :class="style.content">
       <div v-if="props.withHeader" :class="style.header">
         <h5 :class="style.title">{{ props.title }}</h5>
-        <slot name="close" :close="handleClose" />
+        <slot name="close" :close="handleClose">
+          <bangui-close v-on:click="handleClose" />
+        </slot>
       </div>
       <div :class="style.body">
         <slot />
